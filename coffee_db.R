@@ -3,29 +3,29 @@ library(dbplyr)
 library(tidyverse)
 library(RSQLite)
 library(lubridate)
-setwd("/Users/henriknyhus/Dropbox/Git/coffee")
-setwd("/srv/shiny-server/coffee")
+#setwd("/Users/henriknyhus/Dropbox/Git/coffee")
+# setwd("/srv/shiny-server/coffee")
 
 ###################################################
 ## CREATE NEW
 ###################################################
 ## create empty database
-coffee_db_new <- dbConnect(RSQLite::SQLite(), "coffee_new.sqlite")
+coffee_db <- dbConnect(RSQLite::SQLite(), "coffee.sqlite")
 
-## drop old tables if coffee_db_new already exists
-dbRemoveTable(conn = coffee_db_new, name = "persons")
-dbRemoveTable(conn = coffee_db_new, name = "actions")
+## drop old tables if coffee_db already exists
+dbRemoveTable(conn = coffee_db, name = "persons")
+dbRemoveTable(conn = coffee_db, name = "actions")
 
 ## add tables
-sql <- sqlCreateTable(con = coffee_db_new, 
+sql <- sqlCreateTable(con = coffee_db, 
                       table = "persons", 
                       fields = c(name = "TEXT", 
                                  active = "SMALLINT"), 
                       row.names = FALSE)
-dbExecute(conn = coffee_db_new, 
+dbExecute(conn = coffee_db, 
           statement = sql, 
           overwrite = TRUE)
-sql <- sqlCreateTable(con = coffee_db_new, 
+sql <- sqlCreateTable(con = coffee_db, 
                       table = "actions", 
                       fields = c(time = "REAL",
                                  name_id = "TEXT", 
@@ -33,62 +33,36 @@ sql <- sqlCreateTable(con = coffee_db_new,
                                  action = "TEXT",
                                  backfilled = "SMALLINT"), 
                       row.names = FALSE)
-dbExecute(conn = coffee_db_new, 
+dbExecute(conn = coffee_db, 
           statement = sql, 
           overwrite = TRUE)
-dbListTables(coffee_db_new)
+dbListTables(coffee_db)
 
 
 ###################################################
 ## ADD NAMES MANUALLY TO NEW
 ###################################################
-persons <- read_csv("persons.csv")
-rs <- dbSendStatement(conn = coffee_db_new, 
+rs <- dbSendStatement(conn = coffee_db, 
                       statement = "INSERT INTO persons (name, active) VALUES (:x, :y)")
-dbBind(rs, param = list(x = persons$name, y = persons$active))
+dbBind(rs, param = list(x = "A Guest", y = 1))
 
-dbGetQuery(coffee_db_new, "SELECT rowid, * FROM persons")
+dbGetQuery(coffee_db, "SELECT rowid, * FROM persons")
 
 
 ###################################################
-## GET OLD DATA
+## GET DATA
 ###################################################
-coffee_db <- dbConnect(RSQLite::SQLite(), "coffee.sqlite")
-
 p <- dbGetQuery(conn = coffee_db,
                 statement = "SELECT rowid, * FROM persons") %>% as_tibble()
 d <- dbGetQuery(conn = coffee_db, 
                 statement = "SELECT rowid, * FROM actions") %>% as_tibble()
-d %>% mutate(name_id = as.integer(name_id)) %>% left_join(p, by = c("name_id" = "rowid")) %>% View()
-
 d
 p
-
-###################################################
-## MOVE REAL DATA TO NEW
-###################################################
-rs <- dbSendStatement(conn = coffee_db_new, 
-                      statement = "INSERT INTO actions (time, name_id, active, action, backfilled) VALUES (:time, :name_id, :active, :action, :backfilled)")
-dbBind(rs, param = list(time = str_c(d$time), 
-                        name_id = d$name_id,
-                        active = d$active,
-                        action = d$action,
-                        backfilled = d$backfilled))
-
-###################################################
-## GET NEW DATA
-###################################################
-p_new <- dbGetQuery(conn = coffee_db_new,
-                statement = "SELECT rowid, * FROM persons") %>% as_tibble()
-d_new <- dbGetQuery(conn = coffee_db_new, 
-                    statement = "SELECT rowid, * FROM actions") %>% as_tibble()
-d_new
-p_new
+d %>% mutate(name_id = as.integer(name_id)) %>% left_join(p, by = c("name_id" = "rowid")) %>% View()
 
 
 ###################################################
-## MANUAL ENTER POTS OF COFFEE
-## TO OLD OR NEW?
+## MANUAL BACKFILLING
 ###################################################
 ## either manually enter names or use your current persons-table as base
 p$name
@@ -110,7 +84,7 @@ write_coffee_manual <- function(data_in){
     select(-amount, -active) %>% 
     mutate(action = "Single Pot")
    
-  rs <- dbSendStatement(conn = coffee_db_new, 
+  rs <- dbSendStatement(conn = coffee_db, 
                         statement = "INSERT INTO actions (time, name_id, active, action, backfilled) VALUES (:time, :name_id, :active, :action, :backfilled)")
   dbBind(rs, param = list(time = str_c(data_in$time), 
                           name_id = data_in$rowid,
@@ -123,18 +97,8 @@ write_coffee_manual <- function(data_in){
 
 
 ###################################################
-## STATISTICS
-###################################################
-
-
-
-
-
-
-###################################################
 ## DISCONNECT
 ###################################################
-dbDisconnect(coffee_db_new)
 dbDisconnect(coffee_db)
 
 
