@@ -1,0 +1,5 @@
+
+body {
+    -moz-transform: scale(1.8); /* for Firefox, default 1*/
+    zoom:180%; /* For Chrome, IE, default 100%*/
+}

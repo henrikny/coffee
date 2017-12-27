@@ -1,0 +1,58 @@
+
+fluidPage(theme = "friend.css",
+  titlePanel("FRIEND coffee-table"),
+  fluidRow(
+    column(width = 4,
+           actionButton(inputId = "pot_single", label = "I made a pot of coffee!!"),
+           br(),
+           actionButton(inputId = "pot_double", label = "I made TWO pots of coffee!!"),
+           br(),
+           actionButton(inputId = "cup", label = "I drank a cup of coffee", icon = icon("coffee")),
+           br(),
+           actionButton(inputId = "tea", label = "I drank a cup of TEA", icon = icon("coffee")),
+           br(),
+           br(),
+           "Top baristas last seven days:",
+           tableOutput("data_top")),
+    column(width = 3,
+           uiOutput("select_name")),
+    column(width = 5,
+           tabsetPanel(id = "tab",
+                       tabPanel(title = "Save", 
+                                br(),
+                                "Time:", textOutput(outputId = "time", inline = TRUE),
+                                br(),
+                                "Action:", textOutput(outputId = "action_selected", inline = TRUE),
+                                br(),
+                                "Person:", textOutput(outputId = "name_selected", inline = TRUE),
+                                br(),
+                                br(),
+                                actionButton(inputId = "save", label = "Save entry", icon = icon("save")),
+                                actionButton(inputId = "clear", label = "Clear", icon = icon("remove"))
+                       ),
+                       tabPanel(title = "Edit data", 
+                                br(),
+                                tableOutput("data_last"),
+                                br(),
+                                actionButton(inputId = "delete_action", label = "Delete last entry", icon = icon("remove"))),
+                       tabPanel(title = "Edit names",
+                                br(),
+                                radioButtons("select_action", label = NULL,
+                                             choices = list("Edit" = 1, "Delete" = 2, "New" = 3), 
+                                             selected = 1),
+                                conditionalPanel(
+                                  condition = "input.select_action == 1",
+                                  uiOutput("edit_name_selection"),
+                                  uiOutput(outputId = "edit_name_box"),
+                                  actionButton(inputId = "edit_name_save", label = "Save", icon = icon("save"))),
+                                conditionalPanel(
+                                  condition = "input.select_action == 2",
+                                  uiOutput("delete_name_selection"),
+                                  actionButton(inputId = "delete_name_delete", label = "Delete", icon = icon("remove"))),
+                                conditionalPanel(
+                                  condition = "input.select_action == 3",
+                                  textInput(inputId = "new_name_box", label = "New name"),
+                                  actionButton(inputId = "new_name_save", label = "Save", icon = icon("save")))
+                       ))
+    ))
+)
