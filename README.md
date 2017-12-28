@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # coffee
 Shiny Coffee app
 
@@ -8,8 +7,14 @@ Shiny Coffee app
 Tired of co-worked complaining about how "no one" makes a pot of coffee?
 Fire up a shiny-server with this bitchin' app, slap up a tablet next the coffee maker and voilà - the barista-of-the-week game is on!
 
+- You need a server (obsolete laptop workes just fine) with ubuntu + shiny-server installed.
+- A table (Galaxy tab/iPad) on same WiFi network.
+
+
 
 ## Initialisation
+
+Check out offee_db.R for more info regarding initialisation.
 
 ```{r}
 ## load libraries
@@ -61,10 +66,8 @@ dbDisconnect(coffee_db)
 
 ## Notes
 
-My current department is called "FRIEND", so feel free to change this to your own :)
+- My current department is called "FRIEND", so feel free to change this to your own :)
 
-Make sure to have all packages installed prior to running the app.
+- Make sure to have all packages installed prior to running the app.
 
-Set up initial db by running some of the lines in coffee_db.R.
-
-To avoid sharing my own data, I set a path to a external db (separate file in parallel folder coffee-db) in global.R
+- To avoid sharing my own data, I set a path to a external db (separate file in parallel folder coffee-db) in global.R
