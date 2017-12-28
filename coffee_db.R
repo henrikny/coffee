@@ -1,8 +1,11 @@
-library(DBI)
-library(dbplyr)
+library(shiny)
 library(tidyverse)
-library(RSQLite)
+library(stringr)
 library(lubridate)
+library(dbplyr)
+library(DBI)
+library(RSQLite)
+getwd()
 # setwd("/Users/henriknyhus/Dropbox/Git/coffee")
 # setwd("/srv/shiny-server/coffee")
 
@@ -115,15 +118,11 @@ d <- tbl(coffee_db, "actions") %>%
   mutate("pots" = if_else(action == "Single pot", 1, 2)) %>% 
   mutate(name_id = as.integer(name_id)) %>% 
   left_join(p, by = c("name_id" = "rowid")) %>% 
-  group_by(name) %>% 
+  group_by(name, time) %>% 
   summarize(pots = sum(pots)) %>% 
   arrange(desc(pots)) %>% 
   right_join(p)
-<<<<<<< HEAD
 View(d)
-=======
-d
->>>>>>> 8284cfd12f3a19c62699c3c1540432d82b191dc3
 
 
 ###################################################
