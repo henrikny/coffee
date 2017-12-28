@@ -9,5 +9,5 @@ library(RSQLite)
 
 ## set path SQLite db
 #db_path <- "coffee.sqlite"
-db_path <- "../coffee-friend/coffee.sqlite"
+db_path <- "../coffee-db/coffee.sqlite"
 
