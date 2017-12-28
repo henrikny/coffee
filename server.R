@@ -79,7 +79,7 @@ function(input, output, session){
       group_by(name) %>% 
       summarize(pots = sum(pots)) %>% 
       arrange(desc(pots)) %>% 
-      top_n(3, pots)
+      top_n(5, pots)
     dbDisconnect(coffee_db)
     
   }
@@ -137,8 +137,8 @@ function(input, output, session){
     get_last_data()
     get_top_data()
     
-    ## kun for å fjerne "selected" på hovedsiden
-    ## ved editering så rendres navnelisten på nytt
+    ## only to clear selected on front page
+    ## if edited, the list is rendered again
     updateRadioButtons(session,
                        inputId = "select_name",
                        choices = data$name_selection %>% filter(active == 1) %>% arrange(name) %>% pull(name),
