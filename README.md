@@ -1,16 +1,28 @@
+<<<<<<< HEAD
 # coffee
+=======
+## coffee
+>>>>>>> aede8f8804769f07234b125a837b04e8aa8d53a5
 
 
 Shiny Coffee app
 
 
+<<<<<<< HEAD
 ## Intro
+=======
+# Intro
+>>>>>>> aede8f8804769f07234b125a837b04e8aa8d53a5
 
 Tired of co-worked complaining about how "no one" makes a pot of coffee?
 Fire up a shiny-server with this bitchin' app, slap up a tablet next the coffee maker and voilà - the barista-of-the-week game is on!
 
 
+<<<<<<< HEAD
 ## Initialisation
+=======
+# Initialisation
+>>>>>>> aede8f8804769f07234b125a837b04e8aa8d53a5
 
 ```{r}
 ## load libraries
@@ -60,7 +72,11 @@ dbDisconnect(coffee_db)
 
 
 
+<<<<<<< HEAD
 ## Notes
+=======
+# Notes
+>>>>>>> aede8f8804769f07234b125a837b04e8aa8d53a5
 
 My current department is called "FRIEND", so feel free to change this to your own :)
 
