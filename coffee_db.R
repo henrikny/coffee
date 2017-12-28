@@ -3,7 +3,7 @@ library(dbplyr)
 library(tidyverse)
 library(RSQLite)
 library(lubridate)
-#setwd("/Users/henriknyhus/Dropbox/Git/coffee")
+# setwd("/Users/henriknyhus/Dropbox/Git/coffee")
 # setwd("/srv/shiny-server/coffee")
 
 ###################################################
