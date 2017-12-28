@@ -2,18 +2,15 @@
 Shiny Coffee app
 
 
-Tired of co-workes complaining about how "no one" makes a pot of coffee?
+Tired of co-worked complaining about how "no one" makes a pot of coffee?
 Fire up a shiny-server with this bitchin' app, slap up a tablet next the coffee maker and voilà - the barista-of-the-week game is on!
 
 
 
+My current department is called "FRIEND", so feel free to change this to your own :)
 
-TO DOS:
+Make sure to have all packages installed prior to running the app.
 
-"Barista of the week" now gets the whole table, should only get last weeks data.
-Problem: Dates are stored as text.
+Set up initial db by running some of the lines in coffee_db.R.
 
-Can not select same person two times. Work-around: Select different person, and then re-select the relevant name.
-
-Auto-hide of notification dialogue
-
+To avoid sharing my own data, I set a path to a external db (separate file in parallel folder coffee-db) in global.R
