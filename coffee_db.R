@@ -1,3 +1,4 @@
+## load libraries
 library(shiny)
 library(tidyverse)
 library(stringr)
@@ -5,6 +6,8 @@ library(lubridate)
 library(dbplyr)
 library(DBI)
 library(RSQLite)
+
+## set path
 getwd()
 # setwd("/Users/henriknyhus/Dropbox/Git/coffee")
 # setwd("/srv/shiny-server/coffee")
@@ -42,6 +45,8 @@ sql <- sqlCreateTable(con = coffee_db,
 dbExecute(conn = coffee_db, 
           statement = sql, 
           overwrite = TRUE)
+
+## list tables
 dbListTables(coffee_db)
 
 
