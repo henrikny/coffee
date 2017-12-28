@@ -119,7 +119,11 @@ d <- tbl(coffee_db, "actions") %>%
   summarize(pots = sum(pots)) %>% 
   arrange(desc(pots)) %>% 
   right_join(p)
+<<<<<<< HEAD
 View(d)
+=======
+d
+>>>>>>> 8284cfd12f3a19c62699c3c1540432d82b191dc3
 
 
 ###################################################
