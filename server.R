@@ -22,7 +22,7 @@ function(input, output, session){
   ## SELECT NAMES
   ###################################################
   get_names <- function(){
-    coffee_db <- dbConnect(RSQLite::SQLite(), "coffee.sqlite")
+    coffee_db <- dbConnect(RSQLite::SQLite(), db_path)
     data$name_selection <- dbGetQuery(conn = coffee_db, 
                                       statement = "SELECT rowid, * FROM persons") %>% 
       as_tibble()
@@ -43,7 +43,7 @@ function(input, output, session){
   ## GET LAST DATA
   ###################################################
   get_last_data <- function(){
-    coffee_db <- dbConnect(RSQLite::SQLite(), "coffee.sqlite")
+    coffee_db <- dbConnect(RSQLite::SQLite(), db_path)
     data$data_last <- dbGetQuery(conn = coffee_db,
                                  statement = "SELECT rowid, * FROM actions WHERE rowid = (SELECT MAX(rowid) FROM actions WHERE active = 1)") %>%
       as_tibble() %>%
@@ -66,7 +66,7 @@ function(input, output, session){
   ## TOP BARISTAS
   ###################################################
   get_top_data <- function(){
-    coffee_db <- dbConnect(RSQLite::SQLite(), "coffee.sqlite")
+    coffee_db <- dbConnect(RSQLite::SQLite(), db_path)
     data$data_top <- tbl(coffee_db, "actions") %>% 
       as_tibble() %>% 
       filter(active == 1) %>% 
@@ -177,7 +177,7 @@ function(input, output, session){
         "Entry saved :)",
         easyClose = TRUE,
         footer = NULL))
-      coffee_db <- dbConnect(RSQLite::SQLite(), "coffee.sqlite")
+      coffee_db <- dbConnect(RSQLite::SQLite(), db_path)
       rs <- dbSendStatement(conn = coffee_db, 
                             statement = "INSERT INTO actions (time, name_id, active, action, backfilled) VALUES (:time, :name_id, :active, :action, :backfilled)")
       rowid <- data$name_selection %>% filter(name == data$name_selected) %>% pull(rowid)
@@ -207,7 +207,7 @@ function(input, output, session){
       )))
   })
   observeEvent(input$data_delete_confirm, {
-    coffee_db <- dbConnect(RSQLite::SQLite(), "coffee.sqlite")
+    coffee_db <- dbConnect(RSQLite::SQLite(), db_path)
     rs <- dbSendStatement(conn = coffee_db, 
                           statement = "UPDATE actions SET active = 0 WHERE rowid = :x")
     dbBind(rs, param = list(x = data$data_last %>% pull(rowid)))
@@ -234,7 +234,7 @@ function(input, output, session){
         "Entry saved :)",
         easyClose = TRUE,
         footer = NULL))
-      coffee_db <- dbConnect(RSQLite::SQLite(), "coffee.sqlite")
+      coffee_db <- dbConnect(RSQLite::SQLite(), db_path)
       rs <- dbSendStatement(conn = coffee_db, 
                             statement = "INSERT INTO persons (name, active) VALUES (:x, :y)")
       dbBind(rs, param = list(x = input$new_name_box, y = 1))
@@ -271,7 +271,7 @@ function(input, output, session){
         "Entry saved :)",
         easyClose = TRUE,
         footer = NULL))
-      coffee_db <- dbConnect(RSQLite::SQLite(), "coffee.sqlite")
+      coffee_db <- dbConnect(RSQLite::SQLite(), db_path)
       rs <- dbSendStatement(conn = coffee_db,
                             statement = "UPDATE persons SET name = :x WHERE name = :y")
       dbBind(rs, param = list(x = input$edit_name_box, y = input$edit_name_selection))
@@ -301,7 +301,7 @@ function(input, output, session){
   })
   
   observeEvent(input$delete_name_delete_confirm, {
-    coffee_db <- dbConnect(RSQLite::SQLite(), "coffee.sqlite")
+    coffee_db <- dbConnect(RSQLite::SQLite(), db_path)
     rs <- dbSendStatement(conn = coffee_db, 
                           statement = "UPDATE persons SET active = 0 WHERE name = :x")
     dbBind(rs, param = list(x = input$delete_name_selection))

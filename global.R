@@ -6,5 +6,8 @@ library(dbplyr)
 library(DBI)
 library(RSQLite)
 
-#setwd("/Users/henriknyhus/Dropbox/Statistikk/Diverse\ Analyser/Coffee")
+
+## set path SQLite db
+#db_path <- "coffee.sqlite"
+db_path <- "../coffee-friend/coffee.sqlite"
 
