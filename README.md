@@ -7,13 +7,10 @@ Fire up a shiny-server with this bitchin' app, slap up a tablet next the coffee 
 
 
 
+My current department is called "FRIEND", so feel free to change this to your own :)
 
-TO DOS:
+Make sure to have all packages installed prior to runnign the app.
 
-"Barista of the week" now gets the whole table, should only get last weeks data.
-Problem: Dates are stored as text.
+Set up initial db by running some of the lines in coffee_db.R.
 
-Can not select same person two times. Work-around: Select different person, and then re-select the relevant name.
-
-Auto-hide of notification dialogue
-
+To aviod sharing my own data, I set a path to a external db (separate file in parrallel folder coffe-db) in global.R

@@ -6,11 +6,13 @@ library(lubridate)
 # setwd("/Users/henriknyhus/Dropbox/Git/coffee")
 # setwd("/srv/shiny-server/coffee")
 
+db_path <- "coffee.sqlite"
+
 ###################################################
 ## CREATE NEW
 ###################################################
 ## create empty database
-coffee_db <- dbConnect(RSQLite::SQLite(), "coffee.sqlite")
+coffee_db <- dbConnect(RSQLite::SQLite(), db_path)
 
 ## drop old tables if coffee_db already exists
 dbRemoveTable(conn = coffee_db, name = "persons")
