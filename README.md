@@ -13,4 +13,4 @@ Make sure to have all packages installed prior to runnign the app.
 
 Set up initial db by running some of the lines in coffee_db.R.
 
-To aviod sharing my own data, I set a path to a external db in global.R
+To aviod sharing my own data, I set a path to a external db (separate file in parrallel folder coffe-db) in global.R
