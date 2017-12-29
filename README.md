@@ -7,9 +7,15 @@ Shiny Coffee app
 Tired of co-worked complaining about how "no one" makes a pot of coffee?
 Fire up a shiny-server with this bitchin' app, slap up a tablet next the coffee maker and voilà - the barista-of-the-week game is on!
 
-- You need a server (obsolete laptop workes just fine) with ubuntu + shiny-server installed.
-- A table (Galaxy tab/iPad) on same WiFi network.
+Everyone select what they just did (mage one/two pots of coffee, drank a cup coffee/tea), their name and hit save which enters the information in the SQLite database. The app also lets you delete last entry, add new, delete and change names.
 
+The top five baristas of the last seven days is shown on the front page.
+
+## What you need
+
+- You need a server (obsolete laptop workes just fine) with ubuntu + shiny-server installed.
+- A tablet (Galaxy/iPad) on same WiFi network.
+- This code
 
 
 ## Initialisation
