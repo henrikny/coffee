@@ -77,3 +77,10 @@ dbDisconnect(coffee_db)
 - Make sure to have all packages installed prior to running the app.
 
 - To avoid sharing my own data, I set a path to a external db (separate file in parallel folder coffee-db) in global.R
+
+
+## Screenshots
+![Front page](./documentation/p1.png)
+![Edit data](./documentation/p2.png)
+
+![Edit names](./documentation/p3.png)
