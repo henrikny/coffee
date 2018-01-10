@@ -130,6 +130,7 @@ d <- tbl(coffee_db, "actions") %>%
   right_join(p)
 View(d)
 
+
 ## total coffees
 d <- tbl(coffee_db, "actions") %>% 
   as_tibble() %>% 
