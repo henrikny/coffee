@@ -174,7 +174,7 @@ function(input, output, session){
     else {
       showModal(modalDialog(
         title = "WHOOOO!",
-        "Entry saved :)",
+        "Entry saved :) Remember to turn the timer!!",
         easyClose = TRUE,
         footer = NULL))
       coffee_db <- dbConnect(RSQLite::SQLite(), db_path)

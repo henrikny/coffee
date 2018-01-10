@@ -142,8 +142,10 @@ d <- tbl(coffee_db, "actions") %>%
   summarize(coffees = n()) %>% 
   arrange(desc(coffees)) %>% 
   right_join(p)
+View(d)
 
 ###################################################
 ## DISCONNECT
 ###################################################
 dbDisconnect(coffee_db)
+
