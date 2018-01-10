@@ -1,5 +1,9 @@
+library(httr)
+set_config(use_proxy(url="proxy.friend.no", port=8080))
 devtools::install_github("swarm-lab/ROpenCVLite")
 devtools::install_github("swarm-lab/Rvision")
+
+
 
 
 my_stream <- stream(0)   # 0 will start your default webcam in general. 
