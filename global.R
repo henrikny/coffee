@@ -1,3 +1,6 @@
+###################################################
+## LOAD LIBRARIES
+###################################################
 library(shiny)
 library(tidyverse)
 library(stringr)
@@ -6,8 +9,8 @@ library(dbplyr)
 library(DBI)
 library(RSQLite)
 
-
-## set path SQLite db
-# db_path <- "coffee.sqlite"
+###################################################
+## SET PATH TO SQLite DB
+###################################################
 db_path <- "../coffee-db/coffee.sqlite"
 
