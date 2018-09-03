@@ -12,5 +12,5 @@ library(RSQLite)
 ###################################################
 ## SET PATH TO SQLite DB
 ###################################################
-db_path <- "../coffee-db/coffee.sqlite"
-#db_path <- "coffee.sqlite"
+#db_path <- "../coffee-db/coffee.sqlite"
+db_path <- "coffee.sqlite"
