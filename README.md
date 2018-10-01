@@ -20,7 +20,7 @@ The top five baristas of the last seven days is shown on the front page.
 
 ## Initialisation
 
-Check out offee_db.R for more info regarding initialisation.
+Check out coffee_db.R for more info regarding initialisation.
 
 ```{r}
 ## load libraries
